@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import NewSingle from './NewSingle';
 
+const news_api_key = `${process.env.REACT_APP_NEWS_API_KEY}`
+
 class News extends Component {
   constructor(props){
     super(props);
@@ -11,7 +13,7 @@ class News extends Component {
 
 
   componentDidMount() {
-    const url = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=1ed248f55ff041a7840f63f3ab1a322e';
+        const url = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey='+ news_api_key;
 
     fetch(url)
       .then((response) => {
