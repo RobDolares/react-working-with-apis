@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import SingleSide from './SingleSide';
 import axios from 'axios';
+import SingleSide from './SingleSide';
+import Error from './Error';
 
 
 const news_api_key = `${process.env.REACT_APP_NEWS_API_KEY}`
@@ -10,6 +11,7 @@ class Sidenews extends Component {
     super(props);
     this.state = {
       sidenews: [],
+      error: false
     };
   }
 
@@ -23,20 +25,22 @@ class Sidenews extends Component {
         sidenews: response.data.articles
       })
   })
-  .catch((error)=>{
-    // handle error
-    console.log(error);
-  })
-  .then(()=>{
-    // always executed
-  });
+    .catch((error)=>{
+      this.setState({
+        error: true
+      })
+    })
   }
 
 
   renderItems() {
-    return this.state.sidenews.map((item) => (
-      <SingleSide key={item.url} item={item} />
-    ));
+    if(!this.state.error){
+      return this.state.sidenews.map((item) => (
+        <SingleSide key={item.url} item={item} />
+      ));
+    } else {
+      return <Error />;
+    }
   }
 
   render() {
