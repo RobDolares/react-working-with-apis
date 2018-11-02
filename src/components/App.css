@@ -16,6 +16,12 @@
   font-size: 2em;
 }
 
+.App input {
+  width: 50% !important;
+  border:1px solid #f2f2f2 !important;
+  text-align: center;
+}
+
 select {
   display: block;
   width: 50%;
